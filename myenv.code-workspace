@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "myenv",
+			"path": "../../../../../../../../PPTLUA/myenv"
+		},
+		{
+			"name": "Q-SYS-PPTX-Module",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
