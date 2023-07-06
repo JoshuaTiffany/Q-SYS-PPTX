@@ -3,10 +3,16 @@
 $powerPoint = New-Object -ComObject PowerPoint.Application
 
 # Open the presentation in a visible window
-$presentation = $powerPoint.Presentations.Open("C:\Users\Joshua.Tiffany\Downloads\Intern Workshop - Financial Literacy 06.21.23.pptx", $null, $null, $true)
+$presentation = $powerPoint.Presentations.Open("C:\Users\Joshua.Tiffany\Downloads\FY23 Q2 Town Hall (OCT2022)-for demo.pptx", $null, $null, $true)
 
-# Define a function to retrieve the current slide number
 function GetSelectedSlideNumber() {
+    # Check if PowerPoint is in presenter mode
+    if ($powerPoint.SlideShowWindows.Count -gt 0) {
+        $slideNumber = $powerPoint.SlideShowWindows.Item(1).View.Slide.SlideNumber
+        return $slideNumber
+    }
+
+    # Default case for normal view mode
     $slide = $powerPoint.ActiveWindow.View.Slide
     $slideNumber = $slide.SlideNumber
     return $slideNumber
@@ -42,8 +48,9 @@ $clientSocket = $listener.AcceptTcpClient()
 $clientAddress = $clientSocket.Client.RemoteEndPoint.Address.ToString()
 Write-Host "Client connected: $clientAddress"
 
-# Initialize the previous slide number
+# Initialize the previous slide number and speaker notes
 $previousSlideNumber = GetSelectedSlideNumber
+$speakerNotes = ""
 
 # Periodically check for slide changes and send data to the client
 while ($true) {
@@ -54,19 +61,42 @@ while ($true) {
     # Check if the slide number has changed
     if ($currentSlideNumber -ne $previousSlideNumber) {
         Write-Host "Current Slide Number: $currentSlideNumber"
-        $speakerNotes = GetSpeakerNotes($currentSlideNumber)
+        $newSpeakerNotes = GetSpeakerNotes($currentSlideNumber)
         Write-Host "Speaker Notes:"
-        Write-Host $speakerNotes
-        $previousSlideNumber = $currentSlideNumber
+        Write-Host $newSpeakerNotes
+        
+        # Append the new speaker notes to the existing notes
+        $speakerNotes += $newSpeakerNotes
 
-        # Send slide data to the client
-        $data = "Current Slide Number: $currentSlideNumber`r`n"
-        $notesData = "Speaker Notes:`r`n$speakerNotes"
+        $previousSlideNumber = $currentSlideNumber
+    }
+
+    # Send the complete speaker notes to the client
+    if ($speakerNotes -ne "") {
+        Write-Host "Sending Speaker Notes:"
+        Write-Host $speakerNotes
+        
+        $data = "Speaker Notes:`r`n$speakerNotes"
         $clientStream = $clientSocket.GetStream()
         $dataBytes = [System.Text.Encoding]::UTF8.GetBytes($data)
-        $notesDataBytes = [System.Text.Encoding]::UTF8.GetBytes($notesData)
         $clientStream.Write($dataBytes, 0, $dataBytes.Length)
-        $clientStream.Write($notesDataBytes, 0, $notesDataBytes.Length)
+        
+        # Reset the speaker notes
+        $speakerNotes = ""
+    }
+    
+    # Check if PowerPoint is in presenter mode
+    if ($powerPoint.SlideShowWindows.Count -gt 0) {
+        $presenterView = $powerPoint.SlideShowWindows.Item(1).View.Type
+        if ($presenterView -eq 2) {  # Presenter mode
+            Write-Host "Presenter Mode"
+            $nextSlide = $currentSlideNumber + 1
+            if ($nextSlide -le $presentation.Slides.Count) {
+                $powerPoint.SlideShowWindows.Item(1).View.Next
+            } else {
+                $powerPoint.SlideShowWindows.Item(1).View.Exit
+            }
+        }
     }
 }
 
