@@ -76,7 +76,7 @@ while ($true) {
         Write-Host "Sending Speaker Notes:"
         Write-Host $speakerNotes
         
-        $data = "Speaker Notes:`r`n$speakerNotes"
+        $data = $speakerNotes
         $clientStream = $clientSocket.GetStream()
         $dataBytes = [System.Text.Encoding]::UTF8.GetBytes($data)
         $clientStream.Write($dataBytes, 0, $dataBytes.Length)
