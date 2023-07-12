@@ -1,4 +1,4 @@
 # Q-SYS-PPTX-Module
-- Connects Python to Lua inside of Q-SYS via TCPSocket 
-- python code processes PPTX, automating PPTX processes and Q-SYS processes
+- Connects Powershell to Lua inside of Q-SYS via TCPSocket 
+- Powershell code processes PPTX, automating PPTX processes and Q-SYS processes
 WIP
