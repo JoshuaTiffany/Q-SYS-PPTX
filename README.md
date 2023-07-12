@@ -14,7 +14,7 @@ Similarly, this can be seen in the text controller console.
 
 Warning:
 Sometimes the TCP connection between Powershell and Q-SYS can bug out, in some instances you might have to restart your core and/or the powershell script to get the connection to work.
-Always make sure you close the TCP connection properly when finished by closes all instances that use TCP connection, I.E. powerpoint that opens, the GUI and the Console window.
+Always make sure you close the TCP connection properly when finished by closing all instances that use TCP connection, I.E. powerpoint that opens, the GUI and the Console window.
 
 
 
