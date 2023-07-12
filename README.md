@@ -26,11 +26,11 @@ There is a 2m warning system for the speaker to see, which when happens will tur
 
 # Custom Command Lines:
 Command lines are lines of text that you put into the speaker notes of any slide you want.
-- Info(currentTalker"~"endTime"~"nextTalker) EX. Info(Josh Tiffany~13:45:00~Stan Nice) - WARNING: In the speaker notes it should not be "~" just the ~ : this is because README synax makes ~ a crossout for words inbetween them
+- Info(currentTalker(tilde)endTime(tilde)nextTalker) EX. Info(Josh Tiffany(tilde)13:45:00(tilde)Stan Nice) - WARNING: In the speaker notes it should not be (tilde) but just ~ to seperate the variables : This is because README syntax makes words between ~ crossout 
 - [video] (WIP) will be used to dim lights automatically if slide contains [Video]
 - [auto] (WIP) Will be customizable info pool so the programmer can add speical events in Q-SYS
 
-The Info[] variables, aka currentTalker~endTime~nextTalker, will stay the same until another slide has another info[] command line in it. So, for example the first slide will have an info[] command and the next 3 do not - what will happen is that the current talker, timer and next talker will not change until a slide with another info[] command is present.
+The Info[] variables, aka currentTalker(tilde)endTime(tilde)nextTalker, will stay the same until another slide has another info[] command line in it. So, for example the first slide will have an info[] command and the next 3 do not - what will happen is that the current talker, timer and next talker will not change until a slide with another info[] command is present.
 
 Command Lines must be spelled properly and exactly as presented above - and in the correct syntax.
 endTime is in military time, "~" is used to seperate variables, ONLY USE ~
