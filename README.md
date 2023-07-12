@@ -26,7 +26,7 @@ There is a 2m warning system for the speaker to see, which when happens will tur
 
 # Custom Command Lines:
 Command lines are lines of text that you put into the speaker notes of any slide you want.
-- Info(currentTalker~endTime~nextTalker) EX. Info(Josh Tiffany~13:45:00~Stan Nice)
+- Info(currentTalker"~"endTime"~"nextTalker) EX. Info(Josh Tiffany~13:45:00~Stan Nice) - WARNING: In the speaker notes it should not be "~" just the ~ : this is because README synax makes ~ a crossout for words inbetween them
 - [video] (WIP) will be used to dim lights automatically if slide contains [Video]
 - [auto] (WIP) Will be customizable info pool so the programmer can add speical events in Q-SYS
 
