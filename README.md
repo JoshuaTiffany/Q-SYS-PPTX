@@ -7,9 +7,9 @@ the PPTXProject.qsys is a base template with all of the code implemeted into a T
 PPTXProject.qsys has to be used with PPTXConnector.exe to establish the TCP connection needed to send data from powerpoint to Q-SYS.
 All LUA inside of the text controller can be edited at anytime.
 
-IP is setup for localhost(127.0.0.1) and port is configurable, by default port is 12345 in Q-SYS.
-In the GUI for PPTXConnector put the IP in, 127.0.0.1 in this instance, put the corresponding port in and the hard URL to your PPTX then click start.
-In the Q-SYS designer there is a section called "Controls" if the connection was made and working, you should see the console populate with info based on the slide.
+IP is setup for core IP, so you need to make sure you know your core's IP, and port is configurable, by default port is 1703 in Q-SYS. DO NOT USE A PORT ALREADY IN USE BY YOUR CORE, I.E: PORT TCP:1702
+In the GUI for PPTXConnector put your core's IP in the text box for IP: - put the corresponding port in, the same one you have in Q-SYS, and the hard URL to your PPTX then click start.
+In the Q-SYS designer there is a section called "Controls" if the connection was made and working, you should see the console populate with info based on the slide. This section is also where you put the port in, you can change the IP by going to Text Controller(the one in design, inside this github) script in Q-SYS and just changing the variable
 Similarly, this can be seen in the text controller console.
 
 Warning:
