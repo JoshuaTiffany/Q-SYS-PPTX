@@ -8,6 +8,7 @@ $buttonStart_Click = {
 	$listener = $null
 	$clientSocket = $null
 	$powerPoint = $null
+	$previousSpeakerNotes = ""
 	
 	try
 	{
@@ -24,10 +25,10 @@ $buttonStart_Click = {
 		# Open the presentation in a visible window
 		$presentation = $powerPoint.Presentations.Open($pptxPath, $null, $null, $true)
 		
-		# Create a TCP listener and start listening
-		$listener, $clientSocket = Start-TcpListener -serverIP $address -port $port
+		$clientSocket = New-Object System.Net.Sockets.TcpClient
+		$clientSocket.Connect($address, $port)
 		
-		$statusLabel.Text = "Server listening on $($listener.LocalEndpoint)"
+		$statusLabel.Text = "Connected to " + $address + ":" + $port.ToString()
 		
 		while ($clientSocket.Connected)
 		{
@@ -39,16 +40,15 @@ $buttonStart_Click = {
 			if ($currentSlideNumber -ne $previousSlideNumber)
 			{
 				Write-Host "Current Slide Number: $currentSlideNumber"
-				$newSpeakerNotes = GetSpeakerNotes($currentSlideNumber)
+				$newSpeakerNotes = GetSpeakerNotes $currentSlideNumber
 				Write-Host "Speaker Notes:"
 				Write-Host $newSpeakerNotes
 				
-				$speakerNotes += $newSpeakerNotes
-				
+				$speakerNotes = $newSpeakerNotes
 				$previousSlideNumber = $currentSlideNumber
 			}
 			
-			if ($speakerNotes -ne "")
+			if ($speakerNotes -ne "" -and $speakerNotes -ne $previousSpeakerNotes)
 			{
 				Write-Host "Sending Speaker Notes:"
 				Write-Host $speakerNotes
@@ -58,8 +58,9 @@ $buttonStart_Click = {
 				$dataBytes = [System.Text.Encoding]::UTF8.GetBytes($data)
 				$clientStream.Write($dataBytes, 0, $dataBytes.Length)
 				
+				$previousSpeakerNotes = $speakerNotes
 				$speakerNotes = ""
-				$statusLabel.Text = "Sent data"
+				$statusLabel.Text = "Sent speaker note"
 			}
 			
 			if ($powerPoint.SlideShowWindows.Count -gt 0)
