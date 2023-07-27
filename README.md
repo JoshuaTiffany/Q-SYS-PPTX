@@ -16,7 +16,7 @@ Warning:
 Sometimes the TCP connection between Powershell and Q-SYS can bug out, in some instances you might have to restart your core and/or the powershell script to get the connection to work.
 Always make sure you close the TCP connection properly when finished by closing all instances that use TCP connection, I.E. powerpoint that opens, the GUI and the Console window.
 
-Make sure the core Data/Time is setup to the correct and current data/time so the Timer can work
+Make sure the core Data/Time is setup to the correct and current data/time so the Timer can work.
 Equally, make sure the device running the Powershell script, PPTXConnector, is the correct and current data/time
 
 
