@@ -1,7 +1,0 @@
-{
-  "version": "1.2.3",
-  "type": "LuaModule",
-  "author": "example@qsc.com",
-  "description": "PPTX module for Q-SYS",
-  "requiredVersion" : "9.5"
-}
