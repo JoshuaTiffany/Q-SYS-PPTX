@@ -39,8 +39,8 @@ There is a 2m warning system for the speaker to see, which when happens will tur
 # Custom Command Lines:
 Command lines are lines of text that you put into the speaker notes of any slide you want.
 - Info(currentTalker(tilde)endTime(tilde)nextTalker) EX. Info(Josh Tiffany(tilde)13:45:00(tilde)Stan Nice) - WARNING: In the speaker notes it should not be (tilde) but just ~ to seperate the variables : This is because README syntax makes words between ~ crossout 
-- [video] (WIP) will be used to dim lights automatically if slide contains [Video]
-- [auto] (WIP) Will be customizable info pool so the programmer can add speical events in Q-SYS
+- [set] Is a control pins(1-16) that can be declared in the speaker notes and can be used for in connection in Q-SYS(I.E: Changing lighting in the room automatically when the presentation starts) - [set] will remain On(True) until the program is closed or TCP server stopped
+- [trigger] Similar to [set], control pins(1-16) that can be setup to connect to Q-SYS objects, main difference is trigger will be set back to default(false) once a slide is changed.  
 
 The Info[] variables, aka currentTalker(tilde)endTime(tilde)nextTalker, will stay the same until another slide has another info[] command line in it. So, for example the first slide will have an info[] command and the next 3 do not - what will happen is that the current talker, timer and next talker will not change until a slide with another info[] command is present.
 
