@@ -1,6 +1,8 @@
 # Q-SYS-PPTX-Module
 - Uses TCP Socket to connect data from powerpoint to Q-SYS for automation
-- Inlcudes automatic speaker notes, timer, current speaker and next speaker 
+- Inlcudes automatic speaker notes, timer, current speaker and next speaker
+
+Link to QSC Code Exchange: https://developers.qsc.com/s/exchange/developer-repo/a3Y4X000001uCt2UAE/qsys-pptx-module
 # How To Use:
 Install the PPTXProject.qsys and the PPTXConnector.exe
 the PPTXProject.qsys is a base template with all of the code implemeted into a Text Controller with controls setup and UCI setup - all fully functional.
